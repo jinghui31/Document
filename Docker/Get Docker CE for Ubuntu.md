@@ -1,17 +1,17 @@
 # Uninstall old versions
 ## Older versions of Docker were called docker or docker-engine. If these are installed, uninstall them:
 ```bat
-[lvmh@localhost] $ systemctl stop docker
-[lvmh@localhost] $ sudo apt-get autoremove docker docker-engine docker.io
+[lvmh@localhost]$ systemctl stop docker
+[lvmh@localhost]$ sudo apt-get autoremove docker docker-engine docker.io
 ```
 
 # Install using the repository
 ## SET UP THE REPOSITORY
 ```bat
-[lvmh@localhost] $ sudo apt-get update
-[lvmh@localhost] $ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-[lvmh@localhost] $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-[lvmh@localhost] $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+[lvmh@localhost]$ sudo apt-get update
+[lvmh@localhost]$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+[lvmh@localhost]$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+[lvmh@localhost]$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
 ## INSTALL DOCKER CE
@@ -20,20 +20,20 @@
 
 ### To install a specific version of Docker CE, list the available versions in the repo, then select and install(安裝指定版本)
 ```bat
-[lvmh@localhost] $ apt-cache madison docker-ce
-[lvmh@localhost] $ sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu
+[lvmh@localhost]$ apt-cache madison docker-ce
+[lvmh@localhost]$ sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu
 ```
 
 ## Configure
 ### 將 lvmh 帳號加入 Docker 群組，就不需使用 sudo 執行 Docker
 ```bat
-[lvmh@localhost] $ sudo usermod -aG docker lvmh
-[lvmh@localhost] $ sudo reboot
+[lvmh@localhost]$ sudo usermod -aG docker lvmh
+[lvmh@localhost]$ sudo reboot
 ```
 
 ### 檢視 Docker 運作架構資訊
 ```bat
-[lvmh@localhost] $ docker info
+[lvmh@localhost]$ docker info
 Containers: 0
  Running: 0
  Paused: 0
@@ -56,11 +56,11 @@ Runtimes: runc
 
 ### Verify that Docker CE is installed correctly by running the hello-world image.
 ```bat
-[lvmh@localhost] $ sudo docker run hello-world
+[lvmh@localhost]$ sudo docker run hello-world
 ```
 
 # Uninstall Docker CE
 ```bat
-[lvmh@localhost] $ sudo apt-get purge docker-ce
-[lvmh@localhost] $ sudo rm -rf /var/lib/docker
+[lvmh@localhost]$ sudo apt-get purge docker-ce
+[lvmh@localhost]$ sudo rm -rf /var/lib/docker
 ```
