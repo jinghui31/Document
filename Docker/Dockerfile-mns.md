@@ -20,6 +20,7 @@ MAINTAINER Jason jason.wang@pomerobotservice.com
 ADD mns-1.0.0.tar.gz /home
 WORKDIR /home/project
 RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 8080
 ENTRYPOINT ["python"]
 CMD ["manage.py"]
 
@@ -59,6 +60,8 @@ RUN apt update && apt upgrade -y && apt install -y python3-pip
 ADD mns-1.0.0.tar.gz /home
 WORKDIR /home/project
 RUN pip3 install --no-cache-dir -r requirements.txt
+ENV LANG=C.UTF-8
+EXPOSE 8080
 ENTRYPOINT ["python3"]
 CMD ["manage.py"]
 
