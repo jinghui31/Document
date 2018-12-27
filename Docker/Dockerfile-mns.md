@@ -42,7 +42,7 @@ print(requests.post(url, data = json.dumps(data, ensure_ascii = False).encode('u
 ```
 
 ## 方法一：純手工打造 Dockerfile
-### 設定 Ubuntu 版 Dockerfile (Build 15分鐘，檔案大小為 577M)
+### 1-1: 設定 Ubuntu 版 Dockerfile (Build 15分鐘，檔案大小為 577M)
 ```sh
 [lvmh@localhost]$ vi Dockerfile
 FROM ubuntu:18.04
@@ -57,8 +57,8 @@ EXPOSE 8080
 ENTRYPOINT ["python3"]
 CMD ["manage.py"]
 
-[lvmh@localhost]$ docker build -t mns-ubt .
-[lvmh@localhost]$ docker run --name mns -d -p 8080:8080 mns-ubt
+[lvmh@localhost]$ docker build -t ubt .
+[lvmh@localhost]$ docker run --name mns1 -d -p 8080:8080 ubt
 [lvmh@localhost]$ vi test.py
 ```
 ```py
@@ -68,35 +68,36 @@ port = 8080
 [lvmh@localhost]$ python3 test.py
 ```
 
-## 方法二：參考 Python 開源 Docker Official Images
-- [Python - Docker Official Images](https://hub.docker.com/_/python/)
-
-### 2-1: 設定 Alpine 版 Dockerfile (Build 10分鐘，檔案大小為 391M)
+### 1-2: 設定 Debian: Stretch Slim 版 Dockerfile (Build 3分鐘，檔案大小為 515M)
 ```sh
 [lvmh@localhost]$ vi Dockerfile
-FROM python:3.7.1-alpine3.8
+FROM debian:stretch-slim
 MAINTAINER Jason jason.wang@pomerobotservice.com
-RUN apk update && apk upgrade && apk add --no-cache gcc g++ \
-    && rm -rf /var/cache/apk/*
+ENV LANG=C.UTF-8
+RUN apt update && apt upgrade -y && apt install -y python3-pip \
+    && rm -rf /var/lib/apt/lists/*
 ADD mns-1.0.0.tar.gz /home
 WORKDIR /home/project
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 EXPOSE 8080
-ENTRYPOINT ["python"]
+ENTRYPOINT ["python3"]
 CMD ["manage.py"]
 
-[lvmh@localhost]$ docker build -t mns-alp .
-[lvmh@localhost]$ docker run --name m1 -d -p 5000:8080 mns-alp
+[lvmh@localhost]$ docker build -t sts .
+[lvmh@localhost]$ docker run --name mns2 -d -p 1111:8080 sts
 [lvmh@localhost]$ vi test.py
 ```
 ```py
-port = 5000
+port = 1111
 ```
 ```sh
 [lvmh@localhost]$ python3 test.py
 ```
 
-### 2-2: 設定 Debian-Stretch 版 Dockerfile (Build 3分鐘，檔案大小為 1.04G)
+## 方法二：參考 Python 開源 Docker Official Images
+- [Python - Docker Official Images](https://hub.docker.com/_/python/)
+
+### 2-1: 設定 Debian: Stretch 版 Dockerfile (Build 3分鐘，檔案大小為 1.04G)
 ```sh
 [lvmh@localhost]$ vi Dockerfile
 FROM python:3.7.1-stretch
@@ -109,7 +110,7 @@ ENTRYPOINT ["python"]
 CMD ["manage.py"]
 
 [lvmh@localhost]$ docker build -t mns-stt .
-[lvmh@localhost]$ docker run --name m2 -d -p 7777:8080 mns-stt
+[lvmh@localhost]$ docker run --name m1 -d -p 7777:8080 mns-stt
 [lvmh@localhost]$ vi test.py
 ```
 ```py
@@ -119,7 +120,7 @@ port = 7777
 [lvmh@localhost]$ python3 test.py
 ```
 
-### 2-3: 設定 Debian-Stretch Slim 版 Dockerfile (Build 1分鐘，檔案大小為 257M)
+### 2-2: 設定 Debian: Stretch Slim 版 Dockerfile (Build 1分鐘，檔案大小為 257M)
 ```sh
 [lvmh@localhost]$ vi Dockerfile
 FROM python:3.7.1-slim-stretch
@@ -132,11 +133,37 @@ ENTRYPOINT ["python"]
 CMD ["manage.py"]
 
 [lvmh@localhost]$ docker build -t mns-sts .
-[lvmh@localhost]$ docker run --name m3 -d -p 6666:8080 mns-sts
+[lvmh@localhost]$ docker run --name m2 -d -p 6666:8080 mns-sts
 [lvmh@localhost]$ vi test.py
 ```
 ```py
 port = 6666
+```
+```sh
+[lvmh@localhost]$ python3 test.py
+```
+
+### 2-3: 設定 Alpine 版 Dockerfile (Build 10分鐘，檔案大小為 391M)
+```sh
+[lvmh@localhost]$ vi Dockerfile
+FROM python:3.7.1-alpine3.8
+MAINTAINER Jason jason.wang@pomerobotservice.com
+python-dev
+RUN apk update && apk upgrade && apk add --no-cache gcc g++ \
+    && rm -rf /var/cache/apk/*
+ADD mns-1.0.0.tar.gz /home
+WORKDIR /home/project
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 8080
+ENTRYPOINT ["python"]
+CMD ["manage.py"]
+
+[lvmh@localhost]$ docker build -t mns-alp .
+[lvmh@localhost]$ docker run --name m3 -d -p 5000:8080 mns-alp
+[lvmh@localhost]$ vi test.py
+```
+```py
+port = 5000
 ```
 ```sh
 [lvmh@localhost]$ python3 test.py
