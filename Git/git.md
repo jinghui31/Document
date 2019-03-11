@@ -35,10 +35,10 @@ git tag TagName Commit(SHA-1) -a -m "This is first tag"
 git branch
 
 # New branch
-git branch Other
+git branch develop
 
 # Change branch
-git checkout Other
+git checkout develop
 
 # History
 ## in git bash
@@ -49,5 +49,5 @@ git tree
 
 # Merge branch
 git checkout master
-git merge Other
+git merge develop
 ```
