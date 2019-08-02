@@ -1,0 +1,54 @@
+{
+  "raspberrypi" : {
+    "LCD" : {
+      "line1" : "japan2",
+      "line2" : "jack"
+    },
+    "LED_Control" : {
+      "LED25" : "CLOSE",
+      "date" : "2017"
+    },
+    "MCP3008" : {
+      "brightness" : 0.4885197850512668,
+      "temperature" : 0.16121152906691805
+    },
+    "PWM_Led" : {
+      "pwm_value" : 43
+    },
+    "RGB_LED" : {
+      "blue" : 34,
+      "green" : 48,
+      "red" : 64
+    },
+    "rfid" : {
+      "-KzD8H_JNFWHVgRzYCnj" : {
+        "cardID" : "22,78,200,59"
+      },
+      "-KzD8LjTnrKB3O2DyTi7" : {
+        "cardID" : "34,64,67,213"
+      },
+      "-KzD8MIsj9KHTdb3pxSu" : {
+        "cardID" : "22,78,200,59"
+      },
+      "-KzD8MuWfbg9s2gPrzYp" : {
+        "cardID" : "34,64,67,213"
+      },
+      "-KzD8NVWXdgB0_EW3MzB" : {
+        "cardID" : "22,78,200,59"
+      },
+      "-KzDCq1frvlMod8iPiyv" : {
+        "cardID" : "34,64,67,213"
+      },
+      "-KzDCrJ9smgdhboTC-yT" : {
+        "cardID" : "22,78,200,59"
+      },
+      "-KzDDQnPyAuHdExGTBPz" : {
+        "cardID" : "34,64,67,213"
+      }
+    },
+    "servo" : {
+      "angle" : 50,
+      "distance" : 316
+    }
+  }
+}
